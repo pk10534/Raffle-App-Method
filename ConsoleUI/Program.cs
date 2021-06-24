@@ -38,40 +38,8 @@ namespace ConsoleUI
             guests.Add(raffleNumber, guest);
         }
 
-        //Loop to print names in Dictionary
-        private static void PrintGuestsName()
-        {
-            foreach (var personName in guests)
-            {
-                Console.WriteLine(personName);
-            }
-        }
 
-        //Get winning raffle number
-        private static int GetRaffleNumber(Dictionary<int, string> guests)
-        {
-            int index;
-            int winner;
-            KeyValuePair<int, string> pair;
-            for (int i = 0; i < 10; i++) //could be ++i
-            {
-                index = rdm.Next(guests.Count);
-                pair = guests.ElementAt(index);
-                winner = pair.Key;
-                return winner;
-            }
-            return 1;
-        }
-        
-        //Print Winner number & name
-        private static void PrintWinner()
-        {
-            int winnerNumber = GetRaffleNumber(guests);
-            string winnerName = guests[winnerNumber];
-            Console.WriteLine($"The Winner is: {winnerName} with the #{winnerNumber}");
-        }
-
-
+            
 
         //Method to return nothing 
         private static void GetUserInfo()
@@ -90,13 +58,39 @@ namespace ConsoleUI
             } while (response1 == "yes" || response1 == ""); //continue looping "otherGuest" etc. while the response to "would you like to enter another name" is equal to "yes" or empty
         }
 
+        private static void PrintGuestsName()
+        {
+            foreach (var personName in guests)
+            {
+                Console.WriteLine(personName);
+            }
+        }
+
+        private static int GetRaffleNumber(Dictionary<int, string> guests)
+        {
+            int index;
+            int winner;
+            KeyValuePair<int, string> pair;
+            for (int i = 0; i < 10; i++) 
+            {
+                index = rdm.Next(guests.Count);
+                pair = guests.ElementAt(index);
+                winner = pair.Key;
+                return winner;
+            }
+            return 1;
+        }
+
+        private static void PrintWinner()
+        {
+            int winnerNumber = GetRaffleNumber(guests); 
+            string winnerName = guests[winnerNumber];
+            Console.WriteLine($"The Winner is: {winnerName} with the raffle #{winnerNumber}");
+        }
 
 
 
-
-
-
-
+        //PRINTING EXERCISE BELOW
 
         static void Main(string[] args)
         {
@@ -104,6 +98,7 @@ namespace ConsoleUI
             GetUserInfo();
             PrintGuestsName();
             PrintWinner();
+            Console.ReadLine();
         }
 
         //Start writing your code here
